@@ -1,3 +1,61 @@
+/* Add to the beginning of the file, keep other styles */
+.carousel-item {
+    position: relative;
+}
+
+.carousel-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(var(--bs-dark-rgb), 0.9), rgba(var(--bs-dark-rgb), 0.6));
+}
+
+.carousel-item .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 2;
+}
+
+.carousel-item h1 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.carousel-item p {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.2s;
+}
+
+.carousel-item .btn {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.4s;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    z-index: 3;
+}
+
+.carousel-indicators {
+    z-index: 3;
+}
+
+.carousel-item.active h1,
+.carousel-item.active p,
+.carousel-item.active .btn {
+    animation-play-state: running;
+}
+
 /* Custom styles to complement Bootstrap theme */
 :root {
     --book-primary: var(--bs-info);
