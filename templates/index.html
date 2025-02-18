@@ -5,10 +5,15 @@
 {% block content %}
 <div class="hero position-relative">
     <img src="https://images.unsplash.com/photo-1485113771930-4e8b61c60d64" alt="Bookstore Banner" class="banner-image">
-    <div class="position-absolute top-50 start-50 translate-middle text-center text-light">
-        <h1 class="display-4">Welcome to BookStore</h1>
-        <p class="lead">Discover your next favorite book</p>
-        <a href="{{ url_for('catalog') }}" class="btn btn-info btn-lg">Browse Catalog</a>
+    <div class="hero-content text-center text-light">
+        <div class="container">
+            <h1 class="display-3 mb-4">Welcome to BookStore</h1>
+            <p class="lead mb-4">Discover your next favorite book from our carefully curated collection</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ url_for('catalog') }}" class="btn btn-info btn-lg">Browse Catalog</a>
+                <a href="{{ url_for('merchandise') }}" class="btn btn-outline-light btn-lg">Shop Merchandise</a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -17,14 +22,24 @@
         <h2 class="text-center mb-4">Featured Books</h2>
         <div class="row">
             {% for book in featured_books %}
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 col-lg-2 mb-4">
                 <div class="card h-100 book-card">
-                    <img src="{{ book.image }}" class="card-img-top book-cover" alt="{{ book.title }}">
+                    <div class="position-relative overflow-hidden">
+                        <img src="{{ book.image }}" class="card-img-top book-cover" alt="{{ book.title }}">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-info">Featured</span>
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ book.title }}</h5>
+                        <h5 class="card-title text-truncate">{{ book.title }}</h5>
                         <p class="card-text">{{ book.author }}</p>
-                        <p class="price">${{ "%.2f"|format(book.price) }}</p>
-                        <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-outline-info">View Details</a>
+                        <p class="price mb-3">₹{{ "%.2f"|format(book.price) }}</p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-outline-info">View Details</a>
+                            <form action="{{ url_for('add_to_cart', book_id=book.id) }}" method="post">
+                                <button type="submit" class="btn btn-info w-100">Add to Cart</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -33,25 +48,66 @@
     </div>
 </section>
 
-<section class="py-5">
+<section class="py-5 bg-dark">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 text-center mb-4">
-                <i class="bi bi-truck display-4 text-info"></i>
-                <h3>Free Shipping</h3>
-                <p>On orders over $50</p>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center p-4 rounded" style="background: rgba(var(--bs-info-rgb), 0.1);">
+                    <i class="bi bi-truck display-4 text-info mb-3"></i>
+                    <h3>Free Shipping</h3>
+                    <p class="mb-0">On orders over ₹1000</p>
+                </div>
             </div>
-            <div class="col-md-4 text-center mb-4">
-                <i class="bi bi-book display-4 text-info"></i>
-                <h3>Wide Selection</h3>
-                <p>Thousands of books</p>
+            <div class="col-md-4">
+                <div class="text-center p-4 rounded" style="background: rgba(var(--bs-info-rgb), 0.1);">
+                    <i class="bi bi-book display-4 text-info mb-3"></i>
+                    <h3>Wide Selection</h3>
+                    <p class="mb-0">Thousands of books</p>
+                </div>
             </div>
-            <div class="col-md-4 text-center mb-4">
-                <i class="bi bi-shield-check display-4 text-info"></i>
-                <h3>Secure Payment</h3>
-                <p>100% secure checkout</p>
+            <div class="col-md-4">
+                <div class="text-center p-4 rounded" style="background: rgba(var(--bs-info-rgb), 0.1);">
+                    <i class="bi bi-shield-check display-4 text-info mb-3"></i>
+                    <h3>Secure Payment</h3>
+                    <p class="mb-0">100% secure checkout</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+{% if featured_merch %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Featured Merchandise</h2>
+        <div class="row">
+            {% for item in featured_merch %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 merch-card">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ item.image }}" class="img-fluid rounded-start h-100 merch-image" alt="{{ item.title }}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <span class="category-badge mb-2 d-inline-block">{{ item.category }}</span>
+                                <h5 class="card-title">{{ item.title }}</h5>
+                                <p class="card-text">{{ item.description }}</p>
+                                <p class="price mb-3">₹{{ "%.2f"|format(item.price) }}</p>
+                                <form action="{{ url_for('add_to_cart', book_id=item.id) }}" method="post">
+                                    <button type="submit" class="btn btn-info">Add to Cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('merchandise') }}" class="btn btn-outline-info btn-lg">View All Merchandise</a>
+        </div>
+    </div>
+</section>
+{% endif %}
 {% endblock %}

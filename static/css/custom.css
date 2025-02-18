@@ -12,32 +12,56 @@ body {
     font-weight: 600;
 }
 
-.hindi-text {
-    font-family: 'Noto Sans Devanagari', sans-serif;
-    color: var(--book-primary);
-}
-
 .book-card {
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
     border: 1px solid rgba(var(--bs-info-rgb), 0.1);
     background: rgba(var(--bs-dark-rgb), 0.8);
+    overflow: hidden;
 }
 
 .book-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.02);
     border-color: var(--book-primary);
+    box-shadow: 0 10px 20px rgba(var(--bs-info-rgb), 0.15);
+}
+
+.book-card:hover .book-cover {
+    transform: scale(1.1);
 }
 
 .banner-image {
-    height: 400px;
+    height: 500px;
     object-fit: cover;
     width: 100%;
-    filter: brightness(0.7);
+    filter: brightness(0.4);
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 3rem;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(var(--bs-dark-rgb), 0.9), rgba(var(--bs-dark-rgb), 0.6));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 4rem 0;
 }
 
 .book-cover {
     height: 300px;
     object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
 .cart-badge {
@@ -47,16 +71,32 @@ body {
 }
 
 .featured-section {
-    background: linear-gradient(rgba(var(--bs-dark-rgb), 0.95), rgba(var(--bs-dark-rgb), 0.95));
-    padding: 3rem 0;
+    background: linear-gradient(165deg, rgba(var(--bs-dark-rgb), 0.98), rgba(var(--bs-dark-rgb), 0.95));
+    padding: 4rem 0;
     border-top: 1px solid rgba(var(--bs-info-rgb), 0.1);
     border-bottom: 1px solid rgba(var(--bs-info-rgb), 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(var(--bs-info-rgb), 0.1), transparent 70%);
 }
 
 .price {
     font-size: 1.25rem;
     color: var(--book-primary);
     font-weight: 600;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    background: rgba(var(--bs-info-rgb), 0.1);
 }
 
 .genre-badge {
@@ -65,53 +105,66 @@ body {
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
     font-size: 0.875rem;
+    transition: all 0.3s ease;
 }
 
-/* Make form inputs more visible in dark theme */
+.book-card:hover .genre-badge {
+    background-color: rgba(var(--bs-info-rgb), 0.2);
+}
+
 .form-control {
-    background-color: var(--bs-dark) !important;
-    border-color: var(--bs-secondary);
+    background-color: rgba(var(--bs-dark-rgb), 0.8) !important;
+    border-color: rgba(var(--bs-info-rgb), 0.2);
+    transition: all 0.3s ease;
 }
 
 .form-control:focus {
     border-color: var(--book-primary);
     box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
+    background-color: rgba(var(--bs-dark-rgb), 0.9) !important;
 }
 
-/* Card hover effects */
-.card {
-    transition: all 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(var(--bs-info-rgb), 0.1);
-}
-
-/* Footer cards styling */
 .footer-card {
     padding: 1.5rem;
     border-radius: 8px;
     height: 100%;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(var(--bs-info-rgb), 0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .footer-card:hover {
     transform: translateY(-5px);
 }
 
+.footer-card:hover::before {
+    opacity: 1;
+}
+
 .about-card {
-    background-color: rgba(13, 110, 253, 0.1);  /* Lighter shade of primary blue */
+    background-color: rgba(13, 110, 253, 0.1);
     border: 1px solid rgba(13, 110, 253, 0.2);
 }
 
 .links-card {
-    background-color: rgba(13, 202, 240, 0.1);  /* Lighter shade of info blue */
+    background-color: rgba(13, 202, 240, 0.1);
     border: 1px solid rgba(13, 202, 240, 0.2);
 }
 
 .contact-card {
-    background-color: rgba(0, 152, 216, 0.1);  /* Custom lighter blue shade */
+    background-color: rgba(0, 152, 216, 0.1);
     border: 1px solid rgba(0, 152, 216, 0.2);
 }
 
@@ -119,6 +172,88 @@ body {
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid rgba(var(--bs-info-rgb), 0.1);
+}
+
+.genre-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.genre-filters .btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.genre-filters .btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(var(--bs-info-rgb), 0.2), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.genre-filters .btn:hover::after {
+    opacity: 1;
+}
+
+.merch-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(var(--bs-info-rgb), 0.1);
+    background: rgba(var(--bs-dark-rgb), 0.8);
+    overflow: hidden;
+}
+
+.merch-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--book-primary);
+    box-shadow: 0 10px 20px rgba(var(--bs-info-rgb), 0.15);
+}
+
+.merch-image {
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.merch-card:hover .merch-image {
+    transform: scale(1.1);
+}
+
+/* Enhanced animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.book-card, .merch-card {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.hindi-text {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    color: var(--book-primary);
+}
+
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(var(--bs-info-rgb), 0.1);
 }
 
 .team-members p {
@@ -140,37 +275,10 @@ body {
     color: var(--bs-info) !important;
 }
 
-/* Add to existing CSS */
-.genre-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.genre-filters .btn {
-    margin-right: 0.5rem;
-}
-
 .category-badge {
     background-color: rgba(var(--bs-info-rgb), 0.1);
     color: var(--book-primary);
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
     font-size: 0.875rem;
-}
-
-.merch-image {
-    height: 250px;
-    object-fit: cover;
-}
-
-.merch-card {
-    transition: transform 0.2s;
-    border: 1px solid rgba(var(--bs-info-rgb), 0.1);
-    background: rgba(var(--bs-dark-rgb), 0.8);
-}
-
-.merch-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--book-primary);
 }
