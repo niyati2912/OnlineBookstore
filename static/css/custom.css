@@ -3,18 +3,36 @@
     --book-primary: var(--bs-info);
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.hindi-text {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    color: var(--book-primary);
+}
+
 .book-card {
     transition: transform 0.2s;
+    border: 1px solid rgba(var(--bs-info-rgb), 0.1);
+    background: rgba(var(--bs-dark-rgb), 0.8);
 }
 
 .book-card:hover {
     transform: translateY(-5px);
+    border-color: var(--book-primary);
 }
 
 .banner-image {
     height: 400px;
     object-fit: cover;
     width: 100%;
+    filter: brightness(0.7);
 }
 
 .book-cover {
@@ -29,13 +47,24 @@
 }
 
 .featured-section {
-    background-color: var(--bs-dark);
+    background: linear-gradient(rgba(var(--bs-dark-rgb), 0.95), rgba(var(--bs-dark-rgb), 0.95));
     padding: 3rem 0;
+    border-top: 1px solid rgba(var(--bs-info-rgb), 0.1);
+    border-bottom: 1px solid rgba(var(--bs-info-rgb), 0.1);
 }
 
 .price {
     font-size: 1.25rem;
     color: var(--book-primary);
+    font-weight: 600;
+}
+
+.genre-badge {
+    background-color: rgba(var(--bs-info-rgb), 0.1);
+    color: var(--book-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
 }
 
 /* Make form inputs more visible in dark theme */
@@ -47,4 +76,14 @@
 .form-control:focus {
     border-color: var(--book-primary);
     box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
+}
+
+/* Card hover effects */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(var(--bs-info-rgb), 0.1);
 }

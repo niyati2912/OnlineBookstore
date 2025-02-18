@@ -18,23 +18,79 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 }
 db.init_app(app)
 
-# Mock book data with prices in rupees
+# Book data with diverse genres and Indian prices
 BOOKS = [
     {
         "id": 1,
         "title": "The Art of Innovation",
         "author": "Matt Ridley",
-        "price": 2499.00,  # Price in INR
+        "genre": "Business",
+        "price": 2499.00,
         "image": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73",
         "description": "A comprehensive guide to innovation and creativity in business."
     },
     {
         "id": 2,
         "title": "Digital Minimalism",
-        "author": "Thought Catalog",
-        "price": 1999.00,  # Price in INR
+        "author": "Cal Newport",
+        "genre": "Self-Help",
+        "price": 1999.00,
         "image": "https://images.unsplash.com/photo-1555252586-d77e8c828e41",
-        "description": "Finding balance in the digital age."
+        "description": "Finding balance in the digital age through minimalism."
+    },
+    {
+        "id": 3,
+        "title": "The Midnight Library",
+        "author": "Matt Haig",
+        "genre": "Fiction",
+        "price": 1799.00,
+        "image": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570",
+        "description": "Between life and death there is a library filled with infinite possibilities."
+    },
+    {
+        "id": 4,
+        "title": "Atomic Habits",
+        "author": "James Clear",
+        "genre": "Self-Help",
+        "price": 2199.00,
+        "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c",
+        "description": "Tiny changes, remarkable results: an easy way to build good habits."
+    },
+    {
+        "id": 5,
+        "title": "The Silent Patient",
+        "author": "Alex Michaelides",
+        "genre": "Thriller",
+        "price": 1899.00,
+        "image": "https://images.unsplash.com/photo-1587876931567-564ce588bfbd",
+        "description": "A psychological thriller that will keep you guessing until the end."
+    },
+    {
+        "id": 6,
+        "title": "Dune",
+        "author": "Frank Herbert",
+        "genre": "Science Fiction",
+        "price": 2299.00,
+        "image": "https://images.unsplash.com/photo-1589409514187-c21d14df0d04",
+        "description": "A masterpiece of science fiction that spans worlds and centuries."
+    },
+    {
+        "id": 7,
+        "title": "The Psychology of Money",
+        "author": "Morgan Housel",
+        "genre": "Finance",
+        "price": 1699.00,
+        "image": "https://images.unsplash.com/photo-1554774853-719586f82d77",
+        "description": "Timeless lessons on wealth, greed, and happiness."
+    },
+    {
+        "id": 8,
+        "title": "Project Hail Mary",
+        "author": "Andy Weir",
+        "genre": "Science Fiction",
+        "price": 2399.00,
+        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
+        "description": "A lone astronaut must save humanity from an extinction-level threat."
     }
 ]
 
