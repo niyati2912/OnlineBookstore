@@ -87,3 +87,15 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(var(--bs-info-rgb), 0.1);
 }
+
+/* Add to the end of the file */
+.team-members {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(var(--bs-info-rgb), 0.1);
+}
+
+.team-members p {
+    font-size: 0.9rem;
+    color: rgba(var(--bs-light-rgb), 0.8);
+}
