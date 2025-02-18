@@ -11,7 +11,7 @@
         <div class="col-md-7">
             <h1 class="mb-3">{{ book.title }}</h1>
             <h4 class="text-muted mb-3">by {{ book.author }}</h4>
-            <p class="price display-4 mb-4">${{ "%.2f"|format(book.price) }}</p>
+            <p class="price display-4 mb-4">₹{{ "%.2f"|format(book.price) }}</p>
             <p class="lead mb-4">{{ book.description }}</p>
             <form action="{{ url_for('add_to_cart', book_id=book.id) }}" method="post">
                 <button type="submit" class="btn btn-info btn-lg">Add to Cart</button>

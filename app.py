@@ -18,13 +18,13 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 }
 db.init_app(app)
 
-# Mock book data
+# Mock book data with prices in rupees
 BOOKS = [
     {
         "id": 1,
         "title": "The Art of Innovation",
         "author": "Matt Ridley",
-        "price": 29.99,
+        "price": 2499.00,  # Price in INR
         "image": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73",
         "description": "A comprehensive guide to innovation and creativity in business."
     },
@@ -32,11 +32,10 @@ BOOKS = [
         "id": 2,
         "title": "Digital Minimalism",
         "author": "Thought Catalog",
-        "price": 24.99,
+        "price": 1999.00,  # Price in INR
         "image": "https://images.unsplash.com/photo-1555252586-d77e8c828e41",
         "description": "Finding balance in the digital age."
-    },
-    # Add more books here using the provided image URLs
+    }
 ]
 
 @app.route('/')
