@@ -3,32 +3,42 @@
 {% block title %}Catalog{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <h1 class="mb-4">Book Catalog</h1>
+<div class="catalog-hero" style="background-image: url('{{ background_image }}');">
+    <div class="catalog-overlay">
+        <div class="container py-5">
+            <h1 class="mb-4 text-light">{% if selected_genre %}{{ selected_genre }} Books{% else %}Book Catalog{% endif %}</h1>
 
-    <!-- Genre Filter Buttons -->
-    <div class="genre-filters mb-4">
-        <a href="{{ url_for('catalog') }}" class="btn {% if not selected_genre %}btn-info{% else %}btn-outline-info{% endif %} mb-2">
-            All Genres
-        </a>
-        {% for genre in genres %}
-        <a href="{{ url_for('catalog', genre=genre) }}" 
-           class="btn {% if selected_genre == genre %}btn-info{% else %}btn-outline-info{% endif %} mb-2">
-            {{ genre }}
-        </a>
-        {% endfor %}
+            <!-- Genre Filter Buttons -->
+            <div class="genre-filters mb-4">
+                <a href="{{ url_for('catalog') }}" class="btn {% if not selected_genre %}btn-info{% else %}btn-outline-light{% endif %} mb-2">
+                    All Genres
+                </a>
+                {% for genre in genres %}
+                <a href="{{ url_for('catalog', genre=genre) }}" 
+                   class="btn {% if selected_genre == genre %}btn-info{% else %}btn-outline-light{% endif %} mb-2">
+                    {{ genre }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
     </div>
+</div>
 
+<div class="container py-5">
     <div class="row">
         {% for book in books %}
         <div class="col-md-3 mb-4">
             <div class="card h-100 book-card">
-                <img src="{{ book.image }}" class="card-img-top book-cover" alt="{{ book.title }}">
+                <div class="position-relative overflow-hidden">
+                    <img src="{{ book.image }}" class="card-img-top book-cover" alt="{{ book.title }}">
+                    <div class="position-absolute top-0 end-0 m-2">
+                        <span class="genre-badge">{{ book.genre }}</span>
+                    </div>
+                </div>
                 <div class="card-body">
-                    <span class="genre-badge mb-2 d-inline-block">{{ book.genre }}</span>
-                    <h5 class="card-title">{{ book.title }}</h5>
+                    <h5 class="card-title text-truncate">{{ book.title }}</h5>
                     <p class="card-text">{{ book.author }}</p>
-                    <p class="price">${{ "%.2f"|format(book.price) }}</p>
+                    <p class="price">₹{{ "%.2f"|format(book.price) }}</p>
                     <div class="d-grid gap-2">
                         <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-outline-info">View Details</a>
                         <form action="{{ url_for('add_to_cart', book_id=book.id) }}" method="post">
