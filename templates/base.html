@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookNama नामा - {% block title %}{% endblock %}</title>
+    <title>BookNama - {% block title %}{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('index') }}">
-                <i class="bi bi-book"></i> BookNama <span class="hindi-text">नामा</span>
+                <i class="bi bi-book"></i> BookNama
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -37,9 +37,11 @@
                     <input class="form-control me-2" type="search" name="search" placeholder="Search books...">
                     <button class="btn btn-outline-info" type="submit">Search</button>
                 </form>
-                <a href="{{ url_for('cart') }}" class="btn btn-outline-secondary">
+                <a href="{{ url_for('cart') }}" class="btn btn-outline-secondary position-relative">
                     <i class="bi bi-cart3"></i>
-                    <span id="cart-badge" class="badge bg-info cart-badge">0</span>
+                    <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                        0
+                    </span>
                 </a>
             </div>
         </div>
