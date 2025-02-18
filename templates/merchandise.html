@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Merchandise{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">BookNama Merchandise</h1>
+    
+    <div class="row">
+        {% for item in merch %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 merch-card">
+                <img src="{{ item.image }}" class="card-img-top merch-image" alt="{{ item.title }}">
+                <div class="card-body">
+                    <span class="category-badge mb-2 d-inline-block">{{ item.category }}</span>
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <p class="price">${{ "%.2f"|format(item.price) }}</p>
+                    <form action="{{ url_for('add_to_cart', book_id=item.id) }}" method="post">
+                        <button type="submit" class="btn btn-info w-100">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

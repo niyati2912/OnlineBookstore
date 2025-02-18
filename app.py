@@ -18,14 +18,14 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 }
 db.init_app(app)
 
-# Book data with diverse genres and Indian prices
+# Book data with diverse genres and prices in USD
 BOOKS = [
     {
         "id": 1,
         "title": "The Art of Innovation",
         "author": "Matt Ridley",
         "genre": "Business",
-        "price": 2499.00,
+        "price": 29.99,
         "image": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73",
         "description": "A comprehensive guide to innovation and creativity in business."
     },
@@ -34,7 +34,7 @@ BOOKS = [
         "title": "Digital Minimalism",
         "author": "Cal Newport",
         "genre": "Self-Help",
-        "price": 1999.00,
+        "price": 24.99,
         "image": "https://images.unsplash.com/photo-1555252586-d77e8c828e41",
         "description": "Finding balance in the digital age through minimalism."
     },
@@ -43,7 +43,7 @@ BOOKS = [
         "title": "The Midnight Library",
         "author": "Matt Haig",
         "genre": "Fiction",
-        "price": 1799.00,
+        "price": 19.99,
         "image": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570",
         "description": "Between life and death there is a library filled with infinite possibilities."
     },
@@ -52,7 +52,7 @@ BOOKS = [
         "title": "Atomic Habits",
         "author": "James Clear",
         "genre": "Self-Help",
-        "price": 2199.00,
+        "price": 26.99,
         "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c",
         "description": "Tiny changes, remarkable results: an easy way to build good habits."
     },
@@ -61,7 +61,7 @@ BOOKS = [
         "title": "The Silent Patient",
         "author": "Alex Michaelides",
         "genre": "Thriller",
-        "price": 1899.00,
+        "price": 22.99,
         "image": "https://images.unsplash.com/photo-1587876931567-564ce588bfbd",
         "description": "A psychological thriller that will keep you guessing until the end."
     },
@@ -70,7 +70,7 @@ BOOKS = [
         "title": "Dune",
         "author": "Frank Herbert",
         "genre": "Science Fiction",
-        "price": 2299.00,
+        "price": 27.99,
         "image": "https://images.unsplash.com/photo-1589409514187-c21d14df0d04",
         "description": "A masterpiece of science fiction that spans worlds and centuries."
     },
@@ -79,7 +79,7 @@ BOOKS = [
         "title": "The Psychology of Money",
         "author": "Morgan Housel",
         "genre": "Finance",
-        "price": 1699.00,
+        "price": 21.99,
         "image": "https://images.unsplash.com/photo-1554774853-719586f82d77",
         "description": "Timeless lessons on wealth, greed, and happiness."
     },
@@ -88,25 +88,91 @@ BOOKS = [
         "title": "Project Hail Mary",
         "author": "Andy Weir",
         "genre": "Science Fiction",
-        "price": 2399.00,
+        "price": 28.99,
         "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
         "description": "A lone astronaut must save humanity from an extinction-level threat."
+    },
+    {
+        "id": 9,
+        "title": "The Thursday Murder Club",
+        "author": "Richard Osman",
+        "genre": "Mystery",
+        "price": 23.99,
+        "image": "https://images.unsplash.com/photo-1546395227-b15d7e5a3517",
+        "description": "Four unlikely friends meet weekly to solve cold cases."
+    },
+    {
+        "id": 10,
+        "title": "The Invisible Life of Addie LaRue",
+        "author": "V.E. Schwab",
+        "genre": "Fantasy",
+        "price": 25.99,
+        "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794",
+        "description": "A woman makes a Faustian bargain to live forever but is cursed to be forgotten by everyone."
     }
 ]
 
+# Merchandise data
+MERCH = [
+    {
+        "id": 1,
+        "title": "BookNama Classic T-Shirt",
+        "category": "Apparel",
+        "price": 19.99,
+        "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+        "description": "100% cotton t-shirt with BookNama logo"
+    },
+    {
+        "id": 2,
+        "title": "Reader's Coffee Mug",
+        "category": "Mugs",
+        "price": 14.99,
+        "image": "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d",
+        "description": "Ceramic mug perfect for your reading sessions"
+    },
+    {
+        "id": 3,
+        "title": "Bookmark Keychain",
+        "category": "Accessories",
+        "price": 9.99,
+        "image": "https://images.unsplash.com/photo-1572371770357-8a26d761d4be",
+        "description": "Metal bookmark keychain with BookNama design"
+    },
+    {
+        "id": 4,
+        "title": "Book Lover Tote Bag",
+        "category": "Bags",
+        "price": 16.99,
+        "image": "https://images.unsplash.com/photo-1544816155-12df9643f363",
+        "description": "Canvas tote bag perfect for carrying your books"
+    }
+]
+
+# Get all unique genres
+GENRES = sorted(list(set(book["genre"] for book in BOOKS)))
+
 @app.route('/')
 def index():
-    featured_books = BOOKS[:4]  # First 4 books as featured
-    return render_template('index.html', featured_books=featured_books)
+    featured_books = BOOKS[:6]  # Show first 6 books as featured
+    featured_merch = MERCH[:2]  # Show first 2 merchandise items
+    return render_template('index.html', featured_books=featured_books, featured_merch=featured_merch)
 
 @app.route('/catalog')
 def catalog():
+    genre = request.args.get('genre', '')
     search = request.args.get('search', '').lower()
+
+    filtered_books = BOOKS
+    if genre:
+        filtered_books = [book for book in BOOKS if book['genre'].lower() == genre.lower()]
     if search:
-        filtered_books = [book for book in BOOKS if search in book['title'].lower() or search in book['author'].lower()]
-    else:
-        filtered_books = BOOKS
-    return render_template('catalog.html', books=filtered_books)
+        filtered_books = [book for book in filtered_books if search in book['title'].lower() or search in book['author'].lower()]
+
+    return render_template('catalog.html', books=filtered_books, genres=GENRES, selected_genre=genre)
+
+@app.route('/merchandise')
+def merchandise():
+    return render_template('merchandise.html', merch=MERCH)
 
 @app.route('/book/<int:book_id>')
 def book_detail(book_id):
@@ -134,15 +200,15 @@ def cart():
 def add_to_cart(book_id):
     if 'cart' not in session:
         session['cart'] = []
-    
+
     cart = session['cart']
     item = next((item for item in cart if item['id'] == book_id), None)
-    
+
     if item:
         item['quantity'] += 1
     else:
         cart.append({'id': book_id, 'quantity': 1})
-    
+
     session['cart'] = cart
     flash('Book added to cart!', 'success')
     return redirect(request.referrer or url_for('catalog'))

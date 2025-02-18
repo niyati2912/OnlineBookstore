@@ -139,3 +139,38 @@ body {
 .footer-card a:hover {
     color: var(--bs-info) !important;
 }
+
+/* Add to existing CSS */
+.genre-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.genre-filters .btn {
+    margin-right: 0.5rem;
+}
+
+.category-badge {
+    background-color: rgba(var(--bs-info-rgb), 0.1);
+    color: var(--book-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+}
+
+.merch-image {
+    height: 250px;
+    object-fit: cover;
+}
+
+.merch-card {
+    transition: transform 0.2s;
+    border: 1px solid rgba(var(--bs-info-rgb), 0.1);
+    background: rgba(var(--bs-dark-rgb), 0.8);
+}
+
+.merch-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--book-primary);
+}
