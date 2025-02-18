@@ -58,25 +58,31 @@
     <footer class="bg-dark text-light mt-5 py-4">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <h5>About Us</h5>
-                    <p>Your trusted online bookstore for all your reading needs.</p>
-                    <div class="team-members">
-                        <p class="mb-1">Niyati (2410992825)</p>
-                        <p class="mb-1">Kritika (2410992791)</p>
-                        <p class="mb-1">Kavyanjali (2410992791)</p>
+                <div class="col-md-4 mb-4">
+                    <div class="footer-card about-card">
+                        <h5>About Us</h5>
+                        <p>Your trusted online bookstore for all your reading needs.</p>
+                        <div class="team-members">
+                            <p class="mb-1">Niyati (2410992825)</p>
+                            <p class="mb-1">Kritika (2410992791)</p>
+                            <p class="mb-1">Kavyanjali (2410992791)</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ url_for('catalog') }}" class="text-light">Catalog</a></li>
-                        <li><a href="{{ url_for('contact') }}" class="text-light">Contact</a></li>
-                    </ul>
+                <div class="col-md-4 mb-4">
+                    <div class="footer-card links-card">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="{{ url_for('catalog') }}" class="text-light">Catalog</a></li>
+                            <li><a href="{{ url_for('contact') }}" class="text-light">Contact</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <h5>Contact</h5>
-                    <p>Email: info@booknama.com<br>Phone: (555) 123-4567</p>
+                <div class="col-md-4 mb-4">
+                    <div class="footer-card contact-card">
+                        <h5>Contact</h5>
+                        <p>Email: info@booknama.com<br>Phone: 555-123-4567</p>
+                    </div>
                 </div>
             </div>
         </div>
