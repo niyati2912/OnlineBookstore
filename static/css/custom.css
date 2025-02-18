@@ -1,0 +1,50 @@
+/* Custom styles to complement Bootstrap theme */
+:root {
+    --book-primary: var(--bs-info);
+}
+
+.book-card {
+    transition: transform 0.2s;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+.banner-image {
+    height: 400px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.book-cover {
+    height: 300px;
+    object-fit: cover;
+}
+
+.cart-badge {
+    position: relative;
+    top: -8px;
+    right: 5px;
+}
+
+.featured-section {
+    background-color: var(--bs-dark);
+    padding: 3rem 0;
+}
+
+.price {
+    font-size: 1.25rem;
+    color: var(--book-primary);
+}
+
+/* Make form inputs more visible in dark theme */
+.form-control {
+    background-color: var(--bs-dark) !important;
+    border-color: var(--bs-secondary);
+}
+
+.form-control:focus {
+    border-color: var(--book-primary);
+    box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
+}
