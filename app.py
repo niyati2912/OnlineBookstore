@@ -18,7 +18,7 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 }
 db.init_app(app)
 
-# Book data with diverse genres and prices in USD
+
 BOOKS = [
     {
         "id": 1,
